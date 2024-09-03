@@ -1,0 +1,23 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlanAdmission
+metadata:
+  name: managed-pipeline-only
+  namespace: release-1109-managed
+spec:
+  applications:
+    - demo
+    - demo-2
+  origin: release-1109-dev
+  pipeline:
+    pipelineRef:
+      resolver: git
+      params:
+        - name: url
+          value: "https://github.com/johnbieren/jb-konflux-demos.git"
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: "release_1109/managed-dummy.yaml"
+    serviceAccountName: release-service-account
+  policy: mvp-policy

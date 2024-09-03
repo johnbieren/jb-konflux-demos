@@ -1,0 +1,39 @@
+---
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: tenant-pipeline
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: release
+spec:
+  description: Useful Pipeline
+  params:
+    - name: released_version
+      type: string
+    - name: snapshot
+      type: string
+  tasks:
+    - name: create-tag
+      params:
+        - name: RELEASED_VERSION
+          value: "$(params.released_version)"
+        - name: SNAPSHOT
+          value: "$(params.snapshot)"
+      taskSpec:
+        params:
+          - name: RELEASED_VERSION
+            type: string
+          - name: SNAPSHOT
+            type: string
+        steps:
+          - name: create-tag
+            image: quay.io/konflux-ci/release-service-utils:e633d51cd41d73e4b3310face21bb980af7a662f
+            script: |
+              #!/usr/bin/env sh
+              set -eo pipefail
+
+              echo $(params.RELEASED_VERSION)
+              get-resource "snapshot" $(params.SNAPSHOT)

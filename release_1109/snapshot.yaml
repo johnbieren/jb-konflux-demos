@@ -1,0 +1,64 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    build.appstudio.openshift.io/repo: https://github.com/scoheb/devfile-sample-python-basic?rev=fc2d04d48ee9c2a83d268c17a1504f28483b2177
+    build.appstudio.redhat.com/bundle: quay.io/redhat-appstudio-tekton-catalog/pipeline-docker-build:c339d3ba0d581a8ed07aadfe46f0ea970838a0ea
+    build.appstudio.redhat.com/commit_sha: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+    build.appstudio.redhat.com/pipeline_name: docker-build
+  labels:
+    appstudio.openshift.io/build-pipelinerun: devfile-sample-python-basic-qbngv
+    appstudio.openshift.io/component: devfile-sample-python-basic
+    test.appstudio.openshift.io/pipelinerunfinishtime: "1694195405"
+    test.appstudio.openshift.io/type: component
+  name: demo-snapshot
+  namespace: release-1109-dev
+spec:
+  application: demo
+  artifacts: {}
+  components:
+  - containerImage: quay.io/hacbs-release-tests/dev-release-team-tenant/simple-python/devfile-sample-python-basic@sha256:199c12573aeec5a0761b4ebcd9769291dd4b94cc9ff15980c64d98e8a03d2dce
+    name: devfile-sample-python-basic
+    source:
+      git:
+        revision: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+        url: https://github.com/scoheb/devfile-sample-python-basic
+  - containerImage: quay.io/hacbs-release-tests/dev-release-team-tenant/simple-python/devfile-sample-python-basic@sha256:199c12573aeec5a0761b4ebcd9769291dd4b94cc9ff15980c64d98e8a03d2dce
+    name: devfile-sample-python-advanced
+    source:
+      git:
+        revision: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+        url: https://github.com/scoheb/devfile-sample-python-basic
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    build.appstudio.openshift.io/repo: https://github.com/scoheb/devfile-sample-python-basic?rev=fc2d04d48ee9c2a83d268c17a1504f28483b2177
+    build.appstudio.redhat.com/bundle: quay.io/redhat-appstudio-tekton-catalog/pipeline-docker-build:c339d3ba0d581a8ed07aadfe46f0ea970838a0ea
+    build.appstudio.redhat.com/commit_sha: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+    build.appstudio.redhat.com/pipeline_name: docker-build
+  labels:
+    appstudio.openshift.io/build-pipelinerun: devfile-sample-python-basic-qbngv
+    appstudio.openshift.io/component: devfile-sample-python-basic
+    test.appstudio.openshift.io/pipelinerunfinishtime: "1694195405"
+    test.appstudio.openshift.io/type: component
+  name: demo-snapshot-2
+  namespace: release-1109-dev
+spec:
+  application: demo-2
+  artifacts: {}
+  components:
+  - containerImage: quay.io/hacbs-release-tests/dev-release-team-tenant/simple-python/devfile-sample-python-basic@sha256:199c12573aeec5a0761b4ebcd9769291dd4b94cc9ff15980c64d98e8a03d2dce
+    name: devfile-sample-python-basic
+    source:
+      git:
+        revision: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+        url: https://github.com/scoheb/devfile-sample-python-basic
+  - containerImage: quay.io/hacbs-release-tests/dev-release-team-tenant/simple-python/devfile-sample-python-basic@sha256:199c12573aeec5a0761b4ebcd9769291dd4b94cc9ff15980c64d98e8a03d2dce
+    name: devfile-sample-python-advanced
+    source:
+      git:
+        revision: fc2d04d48ee9c2a83d268c17a1504f28483b2177
+        url: https://github.com/scoheb/devfile-sample-python-basic

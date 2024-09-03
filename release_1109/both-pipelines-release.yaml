@@ -1,0 +1,11 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+  name: both-tenant-and-managed
+  namespace: release-1109-dev
+spec:
+  releasePlan: both-tenant-and-managed
+  snapshot: demo-snapshot

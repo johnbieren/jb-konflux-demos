@@ -1,0 +1,82 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "false"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: no-pipeline-or-target
+  namespace: release-1109-dev
+spec:
+  application: demo
+  releaseGracePeriodDays: 7
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "false"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: tenant-pipeline-only
+  namespace: release-1109-dev
+spec:
+  application: demo
+  releaseGracePeriodDays: 7
+  pipeline:
+    serviceAccountName: release-service-account
+    pipelineRef:
+      resolver: git
+      params:
+        - name: url
+          value: https://github.com/johnbieren/jb-konflux-demos.git
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: release_1109/tenant-pipeline.yaml
+    params:
+      - name: released_version
+        value: 1.2.3
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "false"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: managed-pipeline-only
+  namespace: release-1109-dev
+spec:
+  application: demo-2
+  releaseGracePeriodDays: 7
+  target: release-1109-managed
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "false"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: both-tenant-and-managed
+  namespace: release-1109-dev
+spec:
+  application: demo
+  releaseGracePeriodDays: 7
+  pipeline:
+    serviceAccountName: release-service-account
+    pipelineRef:
+      resolver: git
+      params:
+        - name: url
+          value: https://github.com/johnbieren/jb-konflux-demos.git
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: release_1109/tenant-pipeline.yaml
+    params:
+      - name: released_version
+        value: 1.2.3
+  target: release-1109-managed

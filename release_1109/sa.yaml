@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-service-account
+  namespace: release-1109-managed
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: release-pipeline-cr-test
+  namespace: release-1109-managed
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: release-pipeline-resource-role
+subjects:
+- kind: ServiceAccount
+  name: release-service-account
+  namespace: release-1109-managed
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-service-account
+  namespace: release-1109-dev
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: release-pipeline-cr-test
+  namespace: release-1109-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: release-pipeline-resource-role
+subjects:
+- kind: ServiceAccount
+  name: release-service-account
+  namespace: release-1109-dev
