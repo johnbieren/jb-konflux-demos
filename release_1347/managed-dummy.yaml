@@ -1,0 +1,76 @@
+---
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: managed-dummy
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: release
+spec:
+  params:
+    - name: release
+      type: string
+      description:
+        The namespaced name (namespace/name) of the Release custom resource initiating this pipeline execution
+    - name: releasePlan
+      type: string
+      description: The namespaced name (namespace/name) of the releasePlan
+    - name: releasePlanAdmission
+      type: string
+      description: The namespaced name (namespace/name) of the releasePlanAdmission
+    - name: releaseServiceConfig
+      type: string
+      description: The namespaced name (namespace/name) of the releaseServiceConfig
+    - name: snapshot
+      type: string
+      description: The namespaced name (namespace/name) of the snapshot
+    - name: enterpriseContractPolicy
+      type: string
+      description: JSON representation of the EnterpriseContractPolicy
+    - name: enterpriseContractExtraRuleData
+      type: string
+      description: |
+        Extra rule data to be merged into the policy specified in params.enterpriseContractPolicy. Use syntax
+        "key1=value1,key2=value2..."
+      default: "pipeline_intention=release"
+    - name: enterpriseContractTimeout
+      type: string
+      description: Timeout setting for `ec validate`
+      default: 40m0s
+    - name: verify_ec_task_bundle
+      type: string
+      description: The location of the bundle containing the verify-enterprise-contract task
+    - name: taskGitUrl
+      type: string
+      description: The url to the git repo where the release-service-catalog tasks to be used are stored
+      default: https://github.com/konflux-ci/release-service-catalog.git
+    - name: taskGitRevision
+      type: string
+      description: The revision in the taskGitUrl repo to be used
+    - name: postCleanUp
+      type: string
+      description: Cleans up workspace after finishing executing the pipeline
+      default: "true"
+  workspaces:
+    - name: release-workspace
+  tasks:
+    - name: add-artifact
+      params:
+        - name: release
+          value: $(params.release)
+      taskSpec:
+        params:
+          - name: release
+        steps:
+          - name: setup
+            image: quay.io/konflux-ci/release-service-utils:e633d51cd41d73e4b3310face21bb980af7a662f
+            script: |
+              #!/usr/bin/env sh
+              set -eux
+
+              RELEASE=$(cut -d '/' -f 2 <<< "$(params.release)")
+              kubectl --warnings-as-errors=true patch release -n release-1347-dev $RELEASE \
+                --type=merge --subresource status --patch \
+                "status: {'artifacts':{'images':[{'urls':["quay.io/konflux-ci/internal-services:f3a49b027725f57c0d648e5e860d60d327d9c2db"]}]}}"

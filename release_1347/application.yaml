@@ -1,0 +1,9 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Application
+metadata:
+  name: internal-services
+  namespace: release-1347-dev
+spec:
+  description: Demo Application
+  displayName: Demo Application

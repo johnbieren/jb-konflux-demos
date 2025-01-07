@@ -1,0 +1,30 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "true"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: 1347-rp
+  namespace: release-1347-dev
+spec:
+  application: internal-services
+  releaseGracePeriodDays: 7
+  finalPipeline:
+    serviceAccountName: dev-service-account
+    pipelineRef:
+      params:
+      - name: url
+        value: https://github.com/johnbieren/release-service-catalog.git
+      - name: revision
+        value: release1347
+      - name: pathInRepo
+        value: pipelines/tenant/update-internal-services-manager/update-internal-services-manager.yaml
+      resolver: git
+    params:
+      - name: repoUrl
+        value: github.com/johnbieren/app-interface-deployments.git
+      - name: githubSecret
+        value: jbieren-github-token
+  target: release-1347-managed
