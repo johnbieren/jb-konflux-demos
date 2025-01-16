@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: sample
+spec:
+  tasks:
+  - name: sample
+    taskSpec:
+      results:
+      - name: output
+        description: just an example
+      steps:
+      - image: ubuntu
+        script:
+          echo "Output from today's demo" | tee $(results.output.path)
+  results:
+  - name: foo
+    description: result from the task
+    value: $(tasks.sample.results.output)
+
