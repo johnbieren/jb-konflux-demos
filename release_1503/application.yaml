@@ -1,0 +1,9 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Application
+metadata:
+  name: app
+  namespace: release-1503-dev
+spec:
+  description: Demo Application
+  displayName: Demo Application

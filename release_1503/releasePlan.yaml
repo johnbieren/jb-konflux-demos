@@ -1,0 +1,14 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+  labels:
+    release.appstudio.openshift.io/author: kube_admin
+    release.appstudio.openshift.io/auto-release: "true"
+    release.appstudio.openshift.io/standing-attribution: "true"
+  name: 1503-rp
+  namespace: release-1503-dev
+spec:
+  application: app
+  releaseGracePeriodDays: 7
+  target: release-1503-managed
