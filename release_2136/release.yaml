@@ -1,0 +1,12 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  labels:
+    release.appstudio.openshift.io/automated: "false"
+    release.appstudio.openshift.io/automated: "user"
+  name: demo-snapshot-test
+  namespace: release-2136-dev
+spec:
+  gracePeriodDays: 7
+  releasePlan: 2136-rp
+  snapshot: demo-snapshot
