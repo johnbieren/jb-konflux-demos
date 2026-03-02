@@ -1,0 +1,59 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    test.appstudio.openshift.io/git-reporter-status: '{"scenarios":{"internal-services-enterprise-contract-internal-services-wzzzc":{"lastUpdateTime":"2025-01-04T22:24:54.757188918Z"}}}'
+    pac.test.appstudio.openshift.io/controller-info: '{"name":"default","configmap":"pipelines-as-code","secret":"pipelines-as-code-secret", "gRepo": "pipelines-as-code"}'
+    pac.test.appstudio.openshift.io/url-repository: internal-services
+    test.appstudio.openshift.io/source-repo-url: 'https://github.com/konflux-ci/internal-services'
+    test.appstudio.openshift.io/pipelinerunstarttime: '1736029208'
+    pac.test.appstudio.openshift.io/repository: internal-services
+    pac.test.appstudio.openshift.io/git-provider: github
+    pac.test.appstudio.openshift.io/event-type: push
+    pac.test.appstudio.openshift.io/url-org: konflux-ci
+    pac.test.appstudio.openshift.io/source-repo-url: 'https://github.com/konflux-ci/internal-services'
+    pac.test.appstudio.openshift.io/log-url: 'https://console.redhat.com/application-pipeline/ns/rhtap-release-2-tenant/pipelinerun/internal-services-on-push-8555g'
+    pac.test.appstudio.openshift.io/max-keep-runs: '3'
+    pac.test.appstudio.openshift.io/original-prname: internal-services-on-push
+    pac.test.appstudio.openshift.io/on-cel-expression: event == "push" && target_branch == "main"
+    build.appstudio.openshift.io/repo: 'https://github.com/konflux-ci/internal-services?rev=f3a49b027725f57c0d648e5e860d60d327d9c2db'
+    pac.test.appstudio.openshift.io/sha: f3a49b027725f57c0d648e5e860d60d327d9c2db
+    pac.test.appstudio.openshift.io/repo-url: 'https://github.com/konflux-ci/internal-services'
+    pac.test.appstudio.openshift.io/sender: johnbieren
+    pac.test.appstudio.openshift.io/installation-id: '47345373'
+    test.appstudio.openshift.io/status: '[{"scenario":"internal-services-enterprise-contract","status":"TestPassed","lastUpdateTime":"2025-01-04T22:24:54.757188918Z","details":"Integration test passed","startTime":"2025-01-04T22:24:34.037015043Z","completionTime":"2025-01-04T22:24:54.757188918Z","testPipelineRunName":"internal-services-enterprise-contract-zx7js"}]'
+    pac.test.appstudio.openshift.io/sha-url: 'https://github.com/konflux-ci/internal-services/commit/f3a49b027725f57c0d648e5e860d60d327d9c2db'
+    pac.test.appstudio.openshift.io/state: completed
+    build.appstudio.redhat.com/target_branch: main
+    pac.test.appstudio.openshift.io/source-branch: refs/heads/main
+    pac.test.appstudio.openshift.io/sha-title: 'Merge pull request #208 from konflux-ci/konflux/references/main'
+    pac.test.appstudio.openshift.io/git-auth-secret: pac-gitauth-dhszjp
+    pac.test.appstudio.openshift.io/branch: main
+    pac.test.appstudio.openshift.io/check-run-id: '35152811739'
+    build.appstudio.redhat.com/commit_sha: f3a49b027725f57c0d648e5e860d60d327d9c2db
+  name: demo-snapshot
+  namespace: release-dev
+  labels:
+    appstudio.openshift.io/component: internal-services
+    pac.test.appstudio.openshift.io/url-repository: internal-services
+    pac.test.appstudio.openshift.io/repository: internal-services
+    pac.test.appstudio.openshift.io/event-type: push
+    test.appstudio.openshift.io/pipelinerunfinishtime: '1736029467'
+    pac.test.appstudio.openshift.io/url-org: konflux-ci
+    pac.test.appstudio.openshift.io/original-prname: internal-services-on-push
+    appstudio.openshift.io/build-pipelinerun: internal-services-on-push-8555g
+    pac.test.appstudio.openshift.io/sha: f3a49b027725f57c0d648e5e860d60d327d9c2db
+    appstudio.openshift.io/application: app
+    pac.test.appstudio.openshift.io/state: completed
+    test.appstudio.openshift.io/type: component
+    pac.test.appstudio.openshift.io/check-run-id: '35152811739'
+spec:
+  application: app
+  artifacts: {}
+  components:
+    - containerImage: 'quay.io/redhat-user-workloads/rhtap-release-2-tenant/internal-services/internal-services@sha256:f8e5d077746454f3639feaa719de41f4ae63b418a09f6f855ff333fb29549fe3'
+      name: internal-services
+      source:
+        git:
+          revision: f3a49b027725f57c0d648e5e860d60d327d9c2db
+          url: 'https://github.com/konflux-ci/internal-services'

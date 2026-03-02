@@ -1,0 +1,22 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlanAdmission
+metadata:
+  name: rpa
+  namespace: release-managed
+spec:
+  applications:
+    - app
+  origin: release-dev
+  pipeline:
+    pipelineRef:
+      resolver: git
+      params:
+        - name: url
+          value: "https://github.com/johnbieren/jb-konflux-demos.git"
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: "dummy-pipeline/fail.yaml"
+    serviceAccountName: release-service-account
+  policy: mvp-policy

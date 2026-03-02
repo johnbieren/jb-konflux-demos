@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: release-dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: release-managed
